@@ -1,0 +1,292 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html, body {
+    height: 100%;
+    background-color: #f0f2f5;
+}
+
+
+html, body, #root, .app-root {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background-clip: padding-box;
+}
+
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #f0f2f5; 
+    min-height: 100vh;
+}
+
+
+.navbar {
+    background-color: #104182;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-left .app-name {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-icon {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.main-container {
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.profile-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.username {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.profile-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 30px;
+}
+
+.stat-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    color: #65676b;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.stat-number {
+    color: #050505;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.edit-profile-btn {
+    background-color: #e4e6eb;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #4b4f56;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin: 0;
+}
+
+.profile-bio {
+    color: #65676b;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    max-width: 700px;
+}
+
+.posts-section {
+    margin-top: 20px;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.post-card {
+    background-color: white;
+    border: 1px solid #e4e6eb;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.post-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f2f5;
+    font-size: 14px;
+}
+
+.post-username {
+    color: #050505;
+    font-weight: 500;
+}
+
+.post-close {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #65676b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #65676b;
+    cursor: pointer;
+}
+
+.post-content {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.post-placeholder {
+    color: #bcc0c4;
+    font-size: 16px;
+}
+
+.post-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #e4e6eb;
+    font-size: 14px;
+}
+
+.post-like {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #65676b;
+}
+
+.like-count {
+    color: #65676b;
+}
+
+.post-date {
+    color: #65676b;
+}
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; 
+}
+
+
+.auth-page .auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px; 
+}
+
+.auth-page .auth-form {
+    background-color: whitesmoke;
+    width: 500px;  
+    padding: 20px;         
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
+    box-sizing: border-box; /
+}
+
+.auth-page .auth-form h2 {
+    margin: 0 0 12px 0;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-page .auth-form input {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;           
+    box-sizing: border-box; 
+}
+
+.auth-page .auth-form button {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgb(41, 145, 186);
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.auth-page .signup-or-signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.auth-page .signup-or-signin a {
+    margin-left: 10px;
+    color: #104182;
+    cursor: pointer;
+}
