@@ -4,6 +4,7 @@ import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import ProtectedRoute from './components/protectedRoute';
 import HomePage from './pages/home';
+import CreatePost from './components/createPost';
 
 function LogOut() {
   localStorage.clear();
@@ -18,6 +19,11 @@ function App() {
           <Route path="/" element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          } />
+          <Route path="/posts" element={
+            <ProtectedRoute>
+              <CreatePost />
             </ProtectedRoute>
           } />
           <Route path="/login" element={<LoginPage />} />

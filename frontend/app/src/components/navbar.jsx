@@ -5,7 +5,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-function NavBar() {
+function NavBar({popUp}) {
     const navigate = useNavigate();
 
     return (
@@ -15,11 +15,11 @@ function NavBar() {
                     <span className="app-name">BookFace</span>
                 </div>
                 <div className="nav-right">
-                    <div className="nav-icon"><IoPersonOutline size='20px' /></div>
-                    <div className="nav-icon"><IoMdAddCircleOutline size='22px' /></div>
+                    <div className="nav-icon" onClick={() => navigate('/')}><IoPersonOutline size='20px' /></div>
+                    <div className="nav-icon" onClick={popUp}><IoMdAddCircleOutline size='22px' /></div>
                     <div className="nav-icon"><FaHouse size='20px' /></div>
                     <div className="nav-icon"><IoSearch size='20px' /></div>
-                    <div class="nav-icon" onClick={() => navigate('/logout')}><IoLogOutOutline size='22px'/></div>
+                    <div className="nav-icon" onClick={() => navigate('/logout')}><IoLogOutOutline size='22px'/></div>
                 </div>
             </div>
         </nav>

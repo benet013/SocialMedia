@@ -1,14 +1,54 @@
 import NavBar from "../components/navbar";
 import Card from "../components/card";
+import CreatePost from "../components/createPost";
+import api from "../api";
+import { useState, useEffect } from "react";
 
 
 function HomePage() {
+    const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState(null);
+    const [popUp, setPopUp] = useState(false);
+    const [newPostCreated, setNewPostCreated] = useState(false);
+
+    useEffect(() => {
+        getUser();
+        getPosts();
+    }, []);
+
+    useEffect(() => {
+        if (newPostCreated) {
+            getPosts();
+            setNewPostCreated(false);
+        }
+    }, [newPostCreated]);
+
+    const getPosts = async () => {
+        try {
+            const response = await api.get('/api/posts/');
+            setPosts(response.data);
+            console.log("Posts fetched:", response.data);
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    }
+
+    const getUser = async () => {
+        try {
+            const response = await api.get('/user/profile/');
+            setUser(response.data.username);
+            console.log("User data:", response.data);
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    }
+
     return (
         <>
-            <NavBar />
+            <NavBar popUp={() => setPopUp(true)} />
             <main className="main-container">
                 <section className="profile-header">
-                    <h1 className="username">@benet013</h1>
+                    <h1 className="username">{user}</h1>
 
                     <div className="profile-info">
 
@@ -40,13 +80,27 @@ function HomePage() {
 
                 <section className="posts-section">
                     <div className="posts-grid">
-                        <Card username="@benet013" content="Hello world!" likes={5} date="30 Oct 2024" />
-                        <Card username="@benet013" content="Just had a great day!" likes={3} date="29 Oct 2024" />
-                        <Card username="@benet013" content="Loving this new app!" likes={8} date="28 Oct 2024" />  
-
+                        {posts.map((post) => (
+                            <Card
+                                key={post.id}
+                                username={post.author_username}
+                                content={post.content}
+                                likes={post.likes}
+                                date={new Date(post.created_at).toLocaleDateString()}
+                            />
+                        ))}
                     </div>
                 </section>
             </main>
+
+
+            {popUp && (
+                <div className="modal-overlay" onMouseDown={() => setPopUp(false)}>
+                    <div className="modal-content" onMouseDown={(e) => e.stopPropagation()}>
+                        <CreatePost popUp={() => setPopUp(false)} newPost={() => setNewPostCreated(true)} />
+                    </div>
+                </div>
+            )}
         </>
     );
 }
