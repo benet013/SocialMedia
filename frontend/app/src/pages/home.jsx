@@ -1,20 +1,18 @@
-import NavBar from "../components/navbar";
 import Card from "../components/card";
-import CreatePost from "../components/createPost";
 import api from "../api";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 
-function HomePage() {
+function HomePage({ newPostCreated, setNewPostCreated }) {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
-    const [popUp, setPopUp] = useState(false);
-    const [newPostCreated, setNewPostCreated] = useState(false);
+    const { id } = useParams();
 
     useEffect(() => {
         getUser();
         getPosts();
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         if (newPostCreated) {
@@ -24,8 +22,9 @@ function HomePage() {
     }, [newPostCreated]);
 
     const getPosts = async () => {
+        const route = id ? `/api/posts/?user=${id}` : `/api/posts/`;
         try {
-            const response = await api.get('/api/posts/');
+            const response = await api.get(route);
             setPosts(response.data);
             console.log("Posts fetched:", response.data);
         } catch (error) {
@@ -34,8 +33,9 @@ function HomePage() {
     }
 
     const getUser = async () => {
+        const route = id ? `/user/profile/${id}` : "/user/profile/self/";
         try {
-            const response = await api.get('/user/profile/');
+            const response = await api.get(route);
             setUser(response.data.username);
             console.log("User data:", response.data);
         } catch (error) {
@@ -45,7 +45,6 @@ function HomePage() {
 
     return (
         <>
-            <NavBar popUp={() => setPopUp(true)} />
             <main className="main-container">
                 <section className="profile-header">
                     <h1 className="username">{user}</h1>
@@ -67,7 +66,10 @@ function HomePage() {
                                 </div>
                             </div>
 
-                            <button className="edit-profile-btn">Edit Profile</button>
+                            {id ?
+                                <button className="message-profile-btn">Message</button>
+                                : <button className="edit-profile-btn">Edit Profile</button>
+                            }
                         </div>
 
                     </div>
@@ -92,15 +94,6 @@ function HomePage() {
                     </div>
                 </section>
             </main>
-
-
-            {popUp && (
-                <div className="modal-overlay" onMouseDown={() => setPopUp(false)}>
-                    <div className="modal-content" onMouseDown={(e) => e.stopPropagation()}>
-                        <CreatePost popUp={() => setPopUp(false)} newPost={() => setNewPostCreated(true)} />
-                    </div>
-                </div>
-            )}
         </>
     );
 }

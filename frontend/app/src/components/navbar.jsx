@@ -18,7 +18,7 @@ function NavBar({popUp}) {
                     <div className="nav-icon" onClick={() => navigate('/')}><IoPersonOutline size='20px' /></div>
                     <div className="nav-icon" onClick={popUp}><IoMdAddCircleOutline size='22px' /></div>
                     <div className="nav-icon"><FaHouse size='20px' /></div>
-                    <div className="nav-icon"><IoSearch size='20px' /></div>
+                    <div className="nav-icon" onClick={() => navigate('/search')}><IoSearch size='20px' /></div>
                     <div className="nav-icon" onClick={() => navigate('/logout')}><IoLogOutOutline size='22px'/></div>
                 </div>
             </div>

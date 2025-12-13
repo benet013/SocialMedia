@@ -1,10 +1,13 @@
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
-import ProtectedRoute from './components/protectedRoute';
-import HomePage from './pages/home';
-import CreatePost from './components/createPost';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import ProtectedRoute from "./components/protectedRoute";
+import NavBar from "./components/navbar";
+import HomePage from "./pages/home";
+import SearchBar from "./components/serachBar";
+import CreatePost from "./components/createPost";
+import LoginPage from "./pages/login";
+import RegisterPage from "./pages/register";
+import "./App.css";
 
 function LogOut() {
   localStorage.clear();
@@ -12,27 +15,70 @@ function LogOut() {
 }
 
 function App() {
+  const [popUp, setPopUp] = useState(false);
+  const [newPostCreated, setNewPostCreated] = useState(false);
+
   return (
     <div className="app-container">
       <BrowserRouter>
+        <NavBar popUp={() => setPopUp(true)} />
+
         <Routes>
-          <Route path="/" element={
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          } />
-          <Route path="/posts" element={
-            <ProtectedRoute>
-              <CreatePost />
-            </ProtectedRoute>
-          } />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <HomePage
+                  newPostCreated={newPostCreated}
+                  setNewPostCreated={setNewPostCreated}
+                />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/profile/:id"
+            element={
+              <ProtectedRoute>
+                <HomePage
+                  newPostCreated={newPostCreated}
+                  setNewPostCreated={setNewPostCreated}
+                />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchBar />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="/logout" element={<LogOut />} />
         </Routes>
+
+        {popUp && (
+          <div className="modal-overlay" onMouseDown={() => setPopUp(false)}>
+            <div
+              className="modal-content"
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              <CreatePost
+                popUp={() => setPopUp(false)}
+                newPost={() => setNewPostCreated(true)}
+              />
+            </div>
+          </div>
+        )}
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
