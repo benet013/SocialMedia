@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 function HomePage({ newPostCreated, setNewPostCreated }) {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
+    const [bio, setBio] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null)
     const { id } = useParams();
 
     useEffect(() => {
@@ -37,6 +39,8 @@ function HomePage({ newPostCreated, setNewPostCreated }) {
         try {
             const response = await api.get(route);
             setUser(response.data.username);
+            setBio(response.data.profile.bio)
+            setImageUrl(response.data.profile.image_url)
             console.log("User data:", response.data);
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -51,7 +55,7 @@ function HomePage({ newPostCreated, setNewPostCreated }) {
 
                     <div className="profile-info">
 
-                        <img src="https://placehold.co/120x120/cccccc/969696?text=Avatar" alt="Profile Picture"
+                        <img src={imageUrl} alt="Profile Picture"
                             className="profile-pic" />
 
                         <div className="profile-right">
@@ -76,7 +80,7 @@ function HomePage({ newPostCreated, setNewPostCreated }) {
 
 
                     <p className="profile-bio">
-                        This is my bio! I love coding and building awesome web applications.
+                        {bio? bio : "This is my bio! I love coding and building awesome web applications."}
                     </p>
                 </section>
 
