@@ -37,6 +37,7 @@ function SearchBar() {
                 {userList.map((user) => (
                     <UserProfile 
                         key={user.id} 
+                        image={user.profile.image_url}
                         username={user.username} 
                         email={user.email} 
                         onClick={() => navigate(`/profile/${user.id}`)}

@@ -7,13 +7,17 @@
 }
 
 
-html, body {
+html,
+body {
     height: 100%;
     background-color: #f0f2f5;
 }
 
 
-html, body, #root, .app-root {
+html,
+body,
+#root,
+.app-root {
     border: none;
     box-shadow: none;
     outline: none;
@@ -23,9 +27,9 @@ html, body, #root, .app-root {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    background-color: #f0f2f5; 
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    background-color: #f0f2f5;
     min-height: 100vh;
 }
 
@@ -248,7 +252,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: transparent; 
+    background-color: transparent;
 }
 
 
@@ -257,16 +261,16 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 40px 20px; 
+    padding: 40px 20px;
 }
 
 .auth-page .auth-form {
     background-color: whitesmoke;
-    width: 500px;  
-    padding: 20px;         
+    width: 500px;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
-    box-sizing: border-box; /
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;/
 }
 
 .auth-page .auth-form h2 {
@@ -280,8 +284,8 @@ body {
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 10px;
-    width: 100%;           
-    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .auth-page .auth-form button {
@@ -310,7 +314,7 @@ body {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0, 0, 0, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -323,17 +327,82 @@ body {
     max-width: 90%;
 }
 
-
-.create-form {
+.edit-form {
     min-height: 100vh;
     display: flex;
     flex: column;
     align-items: center;
     justify-content: center;
-    background-color: transparent; 
+    background-color: transparent;
 }
 
-.create-form div{
+.edit-form .profile-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-form .profile-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.edit-form .profile-img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: #f3f3f3;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.edit-form .profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.edit-form .add-btn {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 10px;
+    font-size: 12px;
+    background: var(--accent-green);
+    color: #b81818;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.edit-form .sub-btn:hover {
+    background: #30c57b;
+}
+
+.edit-form .remove-btn {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 10px;
+    font-size: 12px;
+    background: var(--accent-green);
+    color: #b81818;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.edit-form .remove-btn:hover {
+    background-color: #e4e6eb;
+}
+
+.edit-form .form-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -341,14 +410,75 @@ body {
     padding-bottom: 10px;
 }
 
-.create-form form{
+
+.edit-form form {
     display: flex;
     flex-direction: column;
     width: 400px;
     background-color: whitesmoke;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.edit-form h2 {
+    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-form header {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.edit-form input,
+.edit-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.edit-form button {
+    padding: 12px;
+    background-color: #104182;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-form {
+    min-height: 100vh;
+    display: flex;
+    flex: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.create-form div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.create-form form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
 }
 
 .create-form h2 {
@@ -411,7 +541,7 @@ body {
 
 .search-bar input {
     flex: 1;
-    height: 40px;          
+    height: 40px;
     padding: 0 14px;
     border: none;
     outline: none;
@@ -424,7 +554,7 @@ body {
 }
 
 .search-bar button {
-    height: 40px;             
+    height: 40px;
     padding: 0 16px;
     border: none;
     background-color: #f5f6f7;

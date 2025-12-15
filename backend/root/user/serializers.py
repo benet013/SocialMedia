@@ -30,12 +30,13 @@ class ProfileSerializer(serializers.ModelSerializer):
         write_only=True,
         required=False
     )
+    image = serializers.ImageField(required=False, allow_null=True)
     image_url = serializers.SerializerMethodField()
     remove_image = serializers.BooleanField(write_only=True, required=False)
     
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'email' ,'bio', 'image_url', 'remove_image')
+        fields = ('id', 'username', 'email' ,'bio', 'image','image_url', 'remove_image')
         
     def get_image_url(self, obj):
         request = self.context.get('request')
@@ -65,10 +66,21 @@ class ProfileSerializer(serializers.ModelSerializer):
                 instance.image.delete(save=False)
             instance.image = settings.DEFAULT_PROFILE_IMAGE
         
-        return super().update(instance, validated_data)
+        image = validated_data.get("image")
+        if image:
+            if instance.image and instance.image.name != settings.DEFAULT_PROFILE_IMAGE:
+                instance.image.delete(save=False)
+            instance.image = image
+
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.save()
+        return instance
     
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'email', 'profile')
+        fields = ('id', 'username', 'email','profile')

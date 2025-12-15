@@ -36,7 +36,7 @@ class UserViewset(ReadOnlyModelViewSet):
         serializer = self.get_serializer(request.user)
         return Response(serializer.data)
     
-    @action(detail=False, methods=['patch'], url_path='self/profile')
+    @action(detail=False, methods=['patch'], url_path='self/edit')
     def update_profile(self, request):
         profile = request.user.profile
         serializer = ProfileSerializer(
@@ -53,7 +53,6 @@ class UserViewset(ReadOnlyModelViewSet):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-        
         
 # @api_view(['GET'])
 # def user_profile(request, pk=None):

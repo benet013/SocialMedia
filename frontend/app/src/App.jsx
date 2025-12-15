@@ -1,18 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 import ProtectedRoute from "./components/protectedRoute";
-import NavBar from "./components/navbar";
 import HomePage from "./pages/home";
 import SearchBar from "./components/serachBar";
 import CreatePost from "./components/createPost";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
+import AppLayout from "./pages/appLayout";
 import "./App.css";
 
 function LogOut() {
   localStorage.clear();
   window.location.href = "/login";
 }
+
 
 function App() {
   const [popUp, setPopUp] = useState(false);
@@ -21,7 +22,7 @@ function App() {
   return (
     <div className="app-container">
       <BrowserRouter>
-        <NavBar popUp={() => setPopUp(true)} />
+        <AppLayout popUp={() => setPopUp(true)} />
 
         <Routes>
           <Route path="/login" element={<LoginPage />} />

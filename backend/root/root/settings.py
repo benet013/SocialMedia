@@ -116,7 +116,7 @@ STATIC_URL = "static/"
 
 MEDIA_URL = '/profile_image/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'profile_image')
-DEFAULT_PROFILE_IMAGE = 'profile_image/default.jpg'
+DEFAULT_PROFILE_IMAGE = 'default.jpg'
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 CORS_ALLOW_CREDENTIALS = True
