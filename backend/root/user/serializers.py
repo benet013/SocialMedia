@@ -33,10 +33,26 @@ class ProfileSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False, allow_null=True)
     image_url = serializers.SerializerMethodField()
     remove_image = serializers.BooleanField(write_only=True, required=False)
+    followers_count = serializers.SerializerMethodField()
+    following_count = serializers.SerializerMethodField()
+    is_following = serializers.SerializerMethodField()
     
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'email' ,'bio', 'image','image_url', 'remove_image')
+        fields = ('id', 'username', 'email' ,'bio', 'followers_count', 'following_count', 'is_following','image','image_url', 'remove_image')
+    
+    def get_followers_count(self, obj):
+        return obj.follower.count()
+    
+    def get_following_count(self, obj):
+        return obj.user.following.count()
+    
+    def get_is_following(self, obj):
+        request = self.context.get('request')
+        if not request or request.user.is_anonymous:
+            return False
+        
+        return obj.follower.filter(id=request.user.id).exists()
         
     def get_image_url(self, obj):
         request = self.context.get('request')

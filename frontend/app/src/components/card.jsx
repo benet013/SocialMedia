@@ -1,7 +1,7 @@
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
-function Card({ username, content, likes, date }) {
+function Card({ username, content, likes, liked,date, likedOrDisliked }) {
     return (
         <div className="post-card">
             <div className="post-top-bar">
@@ -12,7 +12,12 @@ function Card({ username, content, likes, date }) {
             </div>
             <div className="post-bottom-bar">
                 <div className="post-like">
-                    <span><FaRegHeart /></span>
+                    <span
+                        className="uil uil-times"
+                        style={{ cursor: "pointer" }}
+                        onClick={likedOrDisliked}
+                    >{liked? <FaHeart/>:<FaRegHeart />}
+                    </span>
                     <span className="like-count">{likes}</span>
                 </div>
                 <span className="post-date">{date}</span>

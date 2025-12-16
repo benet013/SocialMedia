@@ -233,6 +233,7 @@ body {
 }
 
 .post-like {
+    border: none;
     display: flex;
     align-items: center;
     gap: 5px;

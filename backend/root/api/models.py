@@ -7,6 +7,14 @@ class LikeCount(models.Model):
     
     def __str__(self):
         return f"Likes for {self.post.title}: {self.count}"
+    
+class Like(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'post')
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)

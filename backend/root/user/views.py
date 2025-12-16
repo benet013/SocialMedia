@@ -8,6 +8,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 
 User = get_user_model()
@@ -26,10 +27,18 @@ class RegisterView(CreateAPIView):
         
 
 class UserViewset(ReadOnlyModelViewSet):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter]
     search_fields = ['username']
+    
+    def get_queryset(self):
+        qs = User.objects.all()
+        
+        if self.request.user.is_authenticated:
+            qs = qs.exclude(id=self.request.user.id)
+            
+        return qs
     
     @action(detail=False, methods=['get'], url_path='self')
     def self(self, request):
@@ -48,20 +57,33 @@ class UserViewset(ReadOnlyModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
+    @action(detail=True, methods=['patch'], permission_classes=[IsAuthenticated])
+    def follow(self, request, pk=None):
+        target_user = self.get_object()
+        target_profile = target_user.profile
+        user = request.user
+
+        if target_user == user:
+            return Response(
+                {"error": "You cannot follow yourself"},
+                status=400
+            )
+
+        if target_profile.follower.filter(id=user.id).exists():
+            target_profile.follower.remove(user)
+            is_following = False
+        else:
+            target_profile.follower.add(user)
+            is_following = True
+
+        return Response({
+            "followers_count": target_profile.follower.count(),
+            "is_following": is_following
+        })
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-        
-# @api_view(['GET'])
-# def user_profile(request, pk=None):
-#     User = get_user_model()
-#     try:
-#         id = pk if pk else request.user.id
-#         user = User.objects.get(id=id)
-#         serializer = UserSerializer(user)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-#     except User.DoesNotExist:
-#         return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
     
