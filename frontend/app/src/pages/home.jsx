@@ -55,10 +55,10 @@ function HomePage({ newPostCreated, setNewPostCreated }) {
     }
 
     const getPosts = async () => {
-        const route = id ? `/api/posts/?user=${id}` : `/api/posts/`;
+        const route = id ? `/api/posts/?user=${id}` : `/api/posts/?user=self`;
         try {
             const response = await api.get(route);
-            setPosts(response.data);
+            setPosts(response.data.results);
             console.log("Posts fetched:", response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function NavBar({popUp}) {
     const navigate = useNavigate();
 
+
     return (
         <nav className="navbar">
             <div className="nav-container">
@@ -17,7 +18,7 @@ function NavBar({popUp}) {
                 <div className="nav-right">
                     <div className="nav-icon" onClick={() => navigate('/')}><IoPersonOutline size='20px' /></div>
                     <div className="nav-icon" onClick={popUp}><IoMdAddCircleOutline size='22px' /></div>
-                    <div className="nav-icon"><FaHouse size='20px' /></div>
+                    <div className="nav-icon" onClick={() => navigate('/dashboard')}><FaHouse size='20px' /></div>
                     <div className="nav-icon" onClick={() => navigate('/search')}><IoSearch size='20px' /></div>
                     <div className="nav-icon" onClick={() => navigate('/logout')}><IoLogOutOutline size='22px'/></div>
                 </div>

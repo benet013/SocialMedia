@@ -7,6 +7,7 @@ import CreatePost from "./components/createPost";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
 import AppLayout from "./pages/appLayout";
+import Dashboard from "./pages/dashboard";
 import "./App.css";
 
 function LogOut() {
@@ -57,6 +58,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <SearchBar />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
               </ProtectedRoute>
             }
           />
