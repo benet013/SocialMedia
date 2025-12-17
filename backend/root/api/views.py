@@ -39,13 +39,11 @@ class PostViewSet(viewsets.ModelViewSet):
         user = request.query_params.get("user")
         queryset = self.get_queryset()
 
-        # ✅ paginate only dashboard
         if user == "dashboard":
             page = self.paginate_queryset(queryset)
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        # ✅ explicitly disable pagination
         serializer = self.get_serializer(queryset, many=True)
         return Response({
             "results": serializer.data,
