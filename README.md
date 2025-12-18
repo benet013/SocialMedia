@@ -29,6 +29,7 @@ A full-stack social media application featuring user authentication, profiles, p
 
 ## Repository Structure
 
+``` bash
 .
 ├── backend
 │   ├── manage.py
@@ -97,7 +98,7 @@ A full-stack social media application featuring user authentication, profiles, p
 │       └── vite.config.js
 │
 └── README.md
-
+```
 
 ---
 
@@ -128,10 +129,12 @@ Each part has its own `.env` file and configuration.
 
 **File location:** `backend/.env`
 
+```bash
 SECRET_KEY=your-django-secret-key  
 DEBUG=True  
 ALLOWED_HOSTS=127.0.0.1,localhost  
 DATABASE_URL=sqlite:///db.sqlite3  
+```
 
 Notes:
 - `SECRET_KEY` is required by Django and must be kept secret
@@ -146,7 +149,9 @@ Notes:
 
 **File location:** `frontend/app/.env`
 
+```bash
 VITE_API_DEVELOPMENT_URL=http://127.0.0.1:8000  
+```
 
 Notes:
 - This URL must point to the running Django backend
@@ -159,8 +164,10 @@ Notes:
 
 Authentication tokens are stored in `localStorage` using the following keys:
 
+```
 access_token  
 refresh_token  
+```
 
 These constants are defined in `src/constant.js` and are automatically attached to API requests using an Axios interceptor.
 
