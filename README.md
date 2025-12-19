@@ -2,6 +2,8 @@
 
 A full-stack social media application featuring user authentication, profiles, posts, likes, following, and real-time style feeds. The project is split into a Django REST backend and a React (Vite) frontend.
 
+![image alt](https://github.com/benet013/SocialMedia/blob/main/Screenshot%202025-12-19%20181834.png)
+
 ---
 
 ## Features

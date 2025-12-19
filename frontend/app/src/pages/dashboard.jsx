@@ -26,7 +26,6 @@ function Dashboard() {
     }, [nextUrl]);
 
 
-
     const getAllPostsExceptLoggedInUser = async () => {
         if (!nextUrl || loadingRef.current) return;
 
