@@ -30,7 +30,6 @@ A full-stack social media application featuring user authentication, profiles, p
 ## Repository Structure
 
 ``` bash
-.
 ├── backend
 │   ├── manage.py
 │   ├── db.sqlite3
