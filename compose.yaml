@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: <username>
+      POSTGRES_PASSWORD: <password>
+      POSTGRES_DB: mydb
+
+  socialmedia-container-backend:
+    image: socialmedia-backend
+    ports: 
+    - 8000:8000
+    environment:
+      DATABASE_URL: postgres://username:password@db:5432/mydb
+
+
+  socialmedia-container-frontend:
+    image: socialmedia-frontend
+    ports:
+    - 5173:5173
+    environment:
+      VITE_API_DEVELOPMENT_URL: http://127.0.0.1:8000/
